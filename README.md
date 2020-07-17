@@ -73,11 +73,10 @@
 | --- | --- | --- | --- | --- |
 | *生 | 微信 | ￥ 5.00 | 2020/6/16 | 网盘倍速播放不错哦! |
 | l*k | 微信 | ￥ 2.33 | 2020/6/30 | 脚本好，请你吃糖。 |
+| \*船 | 微信 | ￥ 6.66 | 2020/7/10 | 请你冰棍儿，考试顺利。 |
 
 ## 关于本菜鸡
 
 菜鸡的 Notion 主页: [Viki's Notion](https://www.notion.so/vikiqaq/Viki-a4c5dd3c21a7418fb37212d25ecba3c2)
 
 菜鸡的博客:[Viki's Blog](https://blog.vikiboss.top)
-
-欢迎加入[tg 交流群](https://t.me/viki_tg)一起水（目前没啥人，QAQ
