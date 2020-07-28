@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         百度网盘视频倍速播放
 // @description  简单的倍速播放脚本，小白作品，欢迎提意见
-// @version      1.5.0
+// @version      1.5.1
 // @author       Viki (or vikiboss) (https://github.com/vikiboss)
 // @create       2020/6/15
-// @lastmodified 2020/7/3
+// @lastmodified 2020/7/28
 // @feedback-url https://github.com/Vikiboss/baidupan-playspeed-control/issues
 // @icon         https://i.loli.net/2020/06/19/eWDyG1RhCBkTINl.png
 // @homepageURL  https://greasyfork.org/zh-CN/scripts/405388
@@ -43,6 +43,8 @@
     var vip_div; // svip提示框
     var btn_div; // 按钮容器
     var settings = { preRate: 1.0, curRate: 1.0, saveRate: true }; // 默认全局配置
+    var cur_version = "1.5.1";
+    var last_updated = "2020/7/28";
 
     // === 声明读取配置的函数 ===
     var getSettings = () => {
@@ -109,16 +111,14 @@
       btn.onclick = () => {
         if (rateStr === "关于") {
           // "关于"弹窗
-          var about = $(`<div><a target="_blank" href="https://url.cn/0I5gkCrS">作者的Notion主页🏠</a><br />
-          <a target="_blank" href="https://url.cn/2LrdYWFb">去Github反馈🔗</a> | 
-          <a target="_blank" href="https://url.cn/cVKJKHJL">去GreasyFork反馈🔗</a><br />
-          <a target="_blank" href="tencent://AddContact/?uin=1141284758">联系作者🐧</a> | 
-          <a target="_blank" href="https://url.cn/skY6oacU">检查更新🆙</a><br />
-          <a target="_blank" href="https://url.cn/fnjHrRWp">支持💰</a> | 
-          <a target="_blank" href="https://url.cn/WRFjASjs">支持者名单🗒️</a></div>`)[0];
+          var about = $(`<div><a target="_blank" href="https://greasyfork.org/zh-CN/scripts/405388">检查更新🔨</a> |
+            <a target="_blank" href="https://github.com/Vikiboss/baidupan-playspeed-control#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">更新日志📄</a><br />
+            <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/405388/feedback">去GreasyFork反馈🔗</a><br />
+            <a target="_blank" href="https://vikiboss.top">作者菜鸡主页🏠</a> | 
+            <a target="_blank" href="https://www.notion.so/vikiqaq/Donate-1a125c019f75467d880ceb6cb28b4cf6">支持💰</a>`)[0];
           swal({
             title: "关于",
-            text: "当前版本:  1.5.0\n更新时间:  2020/7/3\n脚本作者:  Viki",
+            text: `当前版本:  ${cur_version}\n更新时间:  ${last_updated}\n脚本作者:  Viki`,
             content: about,
           });
           return;
@@ -216,9 +216,9 @@
 
       // === 补充按钮内部文本与样式 ===
       var btnInnerHtml = `<span class="g-button-right">
-            <em class="icon icon-speed"></em>
-            <span class="text" style="width: auto;">${rateStr}</span>
-          </span>`;
+              <em class="icon icon-speed"></em>
+              <span class="text" style="width: auto;">${rateStr}</span>
+            </span>`;
       btn.innerHTML = btnInnerHtml;
       btn.style.userSelect = "none";
       return btn;

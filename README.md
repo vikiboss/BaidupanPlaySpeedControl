@@ -16,13 +16,27 @@
 
 看在本菜鸡造福广大大学生的份上，希望期末对本菜鸡温柔一点，希望人没事 🙏🙏🙏
 
-## 下载
+## 下载 & 使用
 
-- [GreasyFork](https://greasyfork.org/zh-CN/scripts/405388)
+1. [到 GreasyFork 下载脚本](https://greasyfork.org/zh-CN/scripts/405388)
+
+2. 安装 & 启用脚本
 
 > 需先安装 [TamperMonkey](https://url.cn/g9ARPkd6)
 
+> 精力有限，仅亲测于 Edge 与 Chrome 两个主流浏览器，若发现存在问题，请尝试更换为[新版 Edge 浏览器](https://www.microsoft.com/zh-cn/edge)（Chrome 浏览器安装扩展需科学上网）
+
+> [Edge 安装 TamperMonkey 扩展（请使用 Edge 打开）](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/iikmkjmpaadaobahmlepeloendndfphd?hl=zh-CN)
+
 ## 更新日志
+
+### 2020/7/3 1.5.1 版本
+
+- 仅将之前失效短链接替换为原有的有效链接
+
+- 关于页微调
+
+> 腾讯的短链接真的坑人。。。
 
 ### 2020/7/3 1.5 版本
 
@@ -77,6 +91,6 @@
 
 ## 关于本菜鸡
 
-菜鸡的 Notion 主页: [Viki's Notion](https://www.notion.so/vikiqaq/Viki-a4c5dd3c21a7418fb37212d25ecba3c2)
+菜鸡的主页： [Viki's Home](https://vikiboss.top)
 
-菜鸡的博客:[Viki's Blog](https://blog.vikiboss.top)
+菜鸡的 Notion：[Viki's Notion](https://www.notion.so/vikiqaq/Viki-a4c5dd3c21a7418fb37212d25ecba3c2)
