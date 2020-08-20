@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         百度网盘视频倍速播放
 // @description  简单的倍速播放脚本，小白作品，欢迎提意见
-// @version      1.5.1
+// @version      1.6.0
 // @author       Viki (or vikiboss) (https://github.com/vikiboss)
 // @create       2020/6/15
-// @lastmodified 2020/7/28
+// @lastmodified 2020/8/20
 // @feedback-url https://github.com/Vikiboss/baidupan-playspeed-control/issues
 // @icon         https://i.loli.net/2020/06/19/eWDyG1RhCBkTINl.png
 // @homepageURL  https://greasyfork.org/zh-CN/scripts/405388
@@ -42,9 +42,14 @@
     var label; // 显示倍速label
     var vip_div; // svip提示框
     var btn_div; // 按钮容器
-    var settings = { preRate: 1.0, curRate: 1.0, saveRate: true }; // 默认全局配置
-    var cur_version = "1.5.1";
-    var last_updated = "2020/7/28";
+    var settings = {
+      preRate: 1.0,
+      curRate: 1.0,
+      saveRate: true,
+      showAlert: true,
+    }; // 默认全局配置
+    var cur_version = "1.6.0";
+    var last_updated = "2020/8/20";
 
     // === 声明读取配置的函数 ===
     var getSettings = () => {
@@ -54,7 +59,12 @@
       settings.curRate = Number(
         localStorage.getItem("curRate") ? localStorage.getItem("curRate") : 1.0
       ).toFixed(1);
-      settings.saveRate = eval(localStorage.getItem("saveRate"));
+      settings.showAlert = JSON.parse(
+        localStorage.getItem("showAlert")
+          ? localStorage.getItem("showAlert")
+          : true
+      );
+      settings.saveRate = JSON.parse(localStorage.getItem("saveRate"));
     };
 
     // === 页面加载完后读取配置 ===
@@ -86,15 +96,18 @@
       var curRate = player.playbackRate();
       rate = Number(rate || curRate);
       if (!checkRate(rate)) return false;
-      label.innerText = `当前倍速: ${Number(rate).toFixed(1)}`;
+      label.innerText = `当前: ${Number(rate).toFixed(1)}${
+        Number(settings.curRate) > 2 ? "(>2容易卡顿)" : ""
+      }`;
       player.setPlaybackRate(rate);
       settings.curRate = rate;
       localStorage.setItem("curRate", settings.curRate);
+      localStorage.setItem("showAlert", settings.showAlert);
       return true;
     };
 
     // === 定时器，定期检查倍速 ===  // 别问我为什么这么写，问就是我太菜了QAQ
-    setInterval(() => {
+    const check = () => {
       var player;
       if (window.videojs) {
         player = window.videojs.getPlayers("video-player").html5player;
@@ -102,11 +115,12 @@
       if (player) {
         setRate(settings.curRate, player.tech_);
       }
-    }, 1000);
+    };
+    setInterval(check, 1000);
 
     // === 定义生成"倍速按钮"的函数 ===
     var generateBtn = (rateStr, rate) => {
-      var btn = $('<a class="g-button" title="调节播放速度"></a>')[0];
+      var btn = $(`<a class="g-button" title=${rateStr}></a>`)[0];
       rate = rate || 1.0;
       btn.onclick = () => {
         if (rateStr === "关于") {
@@ -115,7 +129,7 @@
             <a target="_blank" href="https://github.com/Vikiboss/baidupan-playspeed-control#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">更新日志📄</a><br />
             <a target="_blank" href="https://greasyfork.org/zh-CN/scripts/405388/feedback">去GreasyFork反馈🔗</a><br />
             <a target="_blank" href="https://vikiboss.top">作者菜鸡主页🏠</a> | 
-            <a target="_blank" href="https://www.notion.so/vikiqaq/Donate-1a125c019f75467d880ceb6cb28b4cf6">支持💰</a>`)[0];
+            <a target="_blank" href="https://www.multmax.top/images/2020/08/20/1.png">支持💰</a>`)[0];
           swal({
             title: "关于",
             text: `当前版本:  ${cur_version}\n更新时间:  ${last_updated}\n脚本作者:  Viki`,
@@ -139,12 +153,17 @@
         if (rateStr === "设置") {
           // "设置"弹窗
           var set = $(
-            `<div><input id="saveRate" type="checkbox" ${
+            `<div>
+            <input id="saveRate" type="checkbox" ${
               settings.saveRate ? "checked" : ""
-            }><span> 记忆历史播放倍速</span></div>`
+            }><span> 记忆历史播放倍速</span><br />
+            <input id="showAlert" type="checkbox" ${
+              settings.showAlert ? "checked" : ""
+            }><span> 显示倍速提示弹窗</span>
+            </div>`
           )[0];
           swal({
-            title: "设置",
+            title: "设置 - 百度网盘倍速播放",
             content: set,
             buttons: {
               cancel: "取消",
@@ -153,7 +172,9 @@
           }).then((btn) => {
             if (btn === "save") {
               settings.saveRate = $("#saveRate")[0].checked;
+              settings.showAlert = $("#showAlert")[0].checked;
               localStorage.setItem("saveRate", $("#saveRate")[0].checked);
+              localStorage.setItem("showAlert", $("#showAlert")[0].checked);
               settings.preRate = 1.0;
               localStorage.setItem("preRate", 1.0);
               swal({
@@ -181,12 +202,18 @@
             if (checkRate(new_rate)) {
               settings.curRate = new_rate || curRate;
               localStorage.setItem("curRate", settings.curRate);
-              swal({
-                text: `成功设置播放速度为${Number(new_rate).toFixed(1)}`,
-                icon: "success",
-                buttons: false,
-                timer: 1000,
-              });
+              const extraMsg =
+                "\n由于网络原因等，大于两倍速可能会出现明显卡顿哦！";
+              if (settings.showAlert) {
+                swal({
+                  text: `成功设置播放速度为${Number(new_rate).toFixed(1)}${
+                    new_rate > 2 ? extraMsg : ""
+                  }`,
+                  icon: "success",
+                  buttons: false,
+                  timer: new_rate > 2 ? 3000 : 1000,
+                });
+              }
             } else {
               if (new_rate === null) return;
               swal({
@@ -201,16 +228,20 @@
           });
         } else if (rateStr === "加速") {
           settings.curRate = curRate + 0.1;
+          check();
         } else if (rateStr === "减速") {
           settings.curRate = curRate - 0.1;
+          check();
         } else {
           settings.curRate = rate;
-          swal({
-            text: `成功设置播放速度为${Number(rate).toFixed(1)}`,
-            icon: "success",
-            buttons: false,
-            timer: 1000,
-          });
+          if (settings.showAlert) {
+            swal({
+              text: `成功设置播放速度为${Number(rate).toFixed(1)}`,
+              icon: "success",
+              buttons: false,
+              timer: 1000,
+            });
+          }
         }
       };
 
@@ -225,14 +256,23 @@
     };
 
     // === 插入倍速按钮集 ===
-    btn_div = $(".video-toolbar-buttonbox")[0];
+    if ($(".video-toolbar-buttonbox")[0]) {
+      btn_div = $(".video-toolbar-buttonbox")[0];
+    } else {
+      btn_div = $(".ad-single-bottom")[0];
+      btn_div.innerHTML = "";
+      btn_div.style.margin = "0px 6px";
+      btn_div.style.width = "100%";
+    }
     var btns = options.map((option) => generateBtn(option.str, option.rate));
     btn_div.append(...btns);
 
     // === 加入倍速显示 ===
     if (!settings.saveRate) settings.curRate = 1;
     label = $(
-      `<span>当前倍速: ${Number(settings.curRate).toFixed(1)}</span>`
+      `<span>当前: ${Number(settings.curRate).toFixed(1)}${
+        Number(settings.curRate) > 2 ? "(>2容易卡顿)" : ""
+      }</span>`
     )[0];
     label.style.color = "#09aaff";
     label.style.fontSize = "18px";
@@ -242,12 +282,15 @@
     btn_div.append(label);
 
     // === 去除多余元素 调整布局 ===
-    var other_div = $(".video-other-video")[0];
-    other_div.style.paddingTop = "50px";
-    vip_div = $(".privilege-box")[0];
-    vip_div.style.display = "none";
-    btn_div.childNodes[1].style.display = "none";
-    btn_div.childNodes[2].style.display = "none";
-    btn_div.childNodes[3].style.display = "none";
+    var other_div;
+    if ($(".video-other-video")[0]) {
+      other_div = $(".video-other-video")[0];
+      other_div.style.paddingTop = "50px";
+      vip_div = $(".privilege-box")[0];
+      vip_div.style.display = "none";
+      btn_div.childNodes[1].style.display = "none";
+      btn_div.childNodes[2].style.display = "none";
+      btn_div.childNodes[3].style.display = "none";
+    }
   };
 })();
