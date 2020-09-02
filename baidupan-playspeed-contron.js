@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         百度网盘视频倍速播放
 // @description  简单的倍速播放脚本，小白作品，欢迎提意见
-// @version      1.6.0
+// @version      1.6.1
 // @author       Viki (or vikiboss) (https://github.com/vikiboss)
 // @create       2020/6/15
-// @lastmodified 2020/8/20
+// @lastmodified 2020/9/2
 // @feedback-url https://github.com/Vikiboss/baidupan-playspeed-control/issues
 // @icon         https://i.loli.net/2020/06/19/eWDyG1RhCBkTINl.png
 // @homepageURL  https://greasyfork.org/zh-CN/scripts/405388
@@ -48,8 +48,8 @@
       saveRate: true,
       showAlert: true,
     }; // 默认全局配置
-    var cur_version = "1.6.0";
-    var last_updated = "2020/8/20";
+    var cur_version = "1.6.1";
+    var last_updated = "2020/9/2";
 
     // === 声明读取配置的函数 ===
     var getSettings = () => {
@@ -287,10 +287,10 @@
       other_div = $(".video-other-video")[0];
       other_div.style.paddingTop = "50px";
       vip_div = $(".privilege-box")[0];
-      vip_div.style.display = "none";
-      btn_div.childNodes[1].style.display = "none";
-      btn_div.childNodes[2].style.display = "none";
-      btn_div.childNodes[3].style.display = "none";
+      vip_div.parentNode.removeChild(vip_div);
+      btn_div.removeChild(btn_div.childNodes[1]);
+      btn_div.removeChild(btn_div.childNodes[1]);
+      btn_div.removeChild(btn_div.childNodes[1]);
     }
   };
 })();
