@@ -1,0 +1,41 @@
+{
+  "name": "baidupan_playspeed_control",
+  "version": "1.6.3",
+  "description": "控制百度网盘在线视频播放速度的简单油猴脚本",
+  "main": "index.js",
+  "scripts": {
+    "node": "node ./dist/index.js",
+    "build": "webpack",
+    "info": "deno run ./src/utils/info.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vikiboss/BaidupanPlaySpeedControl.git"
+  },
+  "keywords": [
+    "greasyfork",
+    "baidu",
+    "baidupan"
+  ],
+  "author": "Viki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Vikiboss/BaidupanPlaySpeedControl/issues"
+  },
+  "homepage": "https://github.com/Vikiboss/BaidupanPlaySpeedControl#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@types/jquery": "^3.5.5",
+    "@types/node": "^14.14.33",
+    "@types/webpack": "^4.41.26",
+    "babel-loader": "^8.2.2",
+    "jquery": "^3.6.0",
+    "sweetalert": "^2.1.2",
+    "ts-loader": "^8.0.18",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0"
+  }
+}

@@ -117,7 +117,7 @@
         setRate(settings.curRate, player.tech_);
       }
     };
-    setInterval(check, 1000);
+    setInterval(check, 10);
 
     // === 定义生成"倍速按钮"的函数 ===
     let generateBtn = (rateStr, rate) => {
