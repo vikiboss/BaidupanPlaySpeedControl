@@ -1,6 +1,6 @@
 # 百度网盘视频倍速播放脚本
 
-请注意，由于百度网盘桌面端的更新，脚本在2021年4月就已失效，如仍有倍速播放需求，可在b站寻找[相关教程](https://search.bilibili.com/all?keyword=%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E5%80%8D%E9%80%9F%E6%92%AD%E6%94%BE)。
+请注意：百度网盘网页端已更新，本脚本已失效，如仍有倍速播放需求，可以使用 Google Chrome 的浏览器扩展 [Global Speed](https://chrome.google.com/webstore/detail/global-speed/jpbjcnkcffbooppibceonlgknpkniiff?hl=zh-CN)。
 
 ## 介绍
 
@@ -167,7 +167,7 @@
 [chrome-tm]: https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo
 [repo]: https://github.com/vikiboss/baidupan-playspeed-control
 [donate]: https://www.multmax.top/images/2020/08/20/1.png
-[home]: https://vikiboss.top
+[home]: https://viki.moe
 [notion]: https://www.notion.so/vikiqaq/Viki-a4c5dd3c21a7418fb37212d25ecba3c2
 [issue]: https://github.com/Vikiboss/baidupan-playspeed-control/issues
 [feedback]: https://greasyfork.org/zh-CN/scripts/405388/feedback
