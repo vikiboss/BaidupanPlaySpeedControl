@@ -1,6 +1,6 @@
 # 百度网盘视频倍速播放脚本
 
-请注意：百度网盘网页端已更新，本脚本已失效，如仍有倍速播放需求，可以使用 Google Chrome 的浏览器扩展 [Global Speed](https://chrome.google.com/webstore/detail/global-speed/jpbjcnkcffbooppibceonlgknpkniiff?hl=zh-CN)。
+【2022/3/1 更新】请注意：百度网盘网页端已更新，本脚本已失效，如仍有倍速播放需求，可以使用 Google Chrome 的浏览器扩展 [Global Speed](https://chrome.google.com/webstore/detail/global-speed/jpbjcnkcffbooppibceonlgknpkniiff?hl=zh-CN)。
 
 ## 介绍
 
